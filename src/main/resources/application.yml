@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: integration
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/pig?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useTimezone=true&serverTimezone=GMT%2B8
+      username: root
+      password: 123456
+      initial-size: 5
+      max-active: 20
+      min-idle: 10
+#  data:
+#    mongodb:
+#      host: 127.0.0.1
+#      database: rs
+#      username:
+#      password:
+  jackson:
+    default-property-inclusion: non_null
+  messages:
+    encoding: UTF-8
+#  redis:
+#    host: localhost
+#    port: 6379
+#  cache:
+#    type: redis
+#    redis:
+#      time-to-live: 10000
+
+# mybaits-plus配置
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      table-underline: true
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
