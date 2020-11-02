@@ -3,6 +3,7 @@ package com.wil.template.config;
 import com.wil.template.domain.service.impl.SysUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -11,8 +12,24 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * 内置UsernamePasswordAuthenticationFilter，默认的登录路径：/login,成功后重定向到'/',所以需要重写
+ */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    /**   前端post请求要这样传递参数：
+     *    async loginClick() {
+     *       var params = new URLSearchParams();
+     *       //你要传给后台的参数值 key/value
+     *       params.append('username', this.username);
+     *       params.append('password', this.password);
+     *       let res = await loginApi(params);
+     *       console.log(res);
+     *       this.$message.success("登录成功");
+     *       this.$router.push("/docker");
+     *     }
+     */
 
     @Autowired
     private SysUserServiceImpl userService;
@@ -21,13 +38,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+
+        //允许跨域请求的OPTIONS请求
+        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS)
+                .permitAll();
+
         // .denyAll();    //拒绝访问
         // .authenticated();    //需认证通过
         // .permitAll();    //无条件允许访问
         // 访问权限
         http.authorizeRequests()
                 .antMatchers("/", "/index").permitAll()
-                .antMatchers("/token/**", "/actuator/**", "/mobile/**").permitAll()
+                .antMatchers("/**", "/actuator/**", "/mobile/**").permitAll()
                 .anyRequest().authenticated();
 
         // 登录配置

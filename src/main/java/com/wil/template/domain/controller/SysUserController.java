@@ -4,6 +4,7 @@ import com.wil.template.domain.entity.SysUser;
 import com.wil.template.domain.service.SysUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -23,7 +24,7 @@ public class SysUserController {
         return "hello world";
     }
 
-    @GetMapping("/info")
+    @PostMapping("/info")
     public SysUser getUser() {
         return sysUserService.getById(1);
     }

@@ -18,11 +18,13 @@ package com.wil.template.domain.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.common.collect.Lists;
 import com.wil.template.domain.entity.SysUser;
 import com.wil.template.domain.mapper.SysUserMapper;
 import com.wil.template.domain.service.SysUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,12 +34,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * @author lengleng
  * @date 2019/2/1
  */
+@Primary
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -60,7 +62,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             String password = user.getPassword();
 
             //创建一个集合来存放权限
-            Collection<GrantedAuthority> authorities = Collections.emptyList();
+            Collection<GrantedAuthority> authorities = Lists.newArrayList();
             //实例化UserDetails对象
             userDetails = new org.springframework.security.core.userdetails.User(s, password,
                     true,
