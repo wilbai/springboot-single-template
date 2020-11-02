@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wil</groupId>
-    <artifactId>single-business-template</artifactId>
+    <artifactId>springboot-single-template</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>template</name>
     <description>Demo project for Spring Boot</description>
