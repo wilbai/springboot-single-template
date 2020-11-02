@@ -12,7 +12,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 /**
  * @author wil
  * @version 1.0
- * @description 简要描述类的作⽤
+ * @description http://host:port/doc.html
  * @date 2020/10/27/ 14:25:07
  */
 public class SwaggerConfiguration {

@@ -75,7 +75,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/css/**");
     }
 
-    // 用户授权验证
+    //
+
+    /**
+     * 用户授权验证,校验密码是在这里进行的
+     * AbstractUserDetailsAuthenticationProvider
+     * DaoAuthenticationProvider
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
@@ -84,6 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // 密码加密方式
     @Bean
     public PasswordEncoder passwordEncoder() {
+//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
         return new BCryptPasswordEncoder();
     }
 

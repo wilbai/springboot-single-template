@@ -25,4 +25,5 @@ import com.wil.template.domain.entity.SysUser;
  */
 public interface SysUserService extends IService<SysUser> {
 
+    String login(String username, String password);
 }
